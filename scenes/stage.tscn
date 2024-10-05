@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmbls1vqoj0kk"]
+[gd_scene load_steps=7 format=3 uid="uid://dmbls1vqoj0kk"]
 
 [ext_resource type="Script" path="res://scripts/stage.gd" id="1_s63fr"]
 [ext_resource type="Texture2D" uid="uid://xa1g2reyowhi" path="res://assets/test/floor.png" id="2_qqx3l"]
 [ext_resource type="PackedScene" uid="uid://b2286i4g86yqa" path="res://scenes/player.tscn" id="3_iodf5"]
+[ext_resource type="PackedScene" uid="uid://4kykphxeted6" path="res://scenes/enemy.tscn" id="4_gnwpv"]
 [ext_resource type="PackedScene" uid="uid://b8yts8io47708" path="res://assets/test/tree.glb" id="4_uubeu"]
 
 [sub_resource type="Environment" id="Environment_lr01n"]
@@ -19,6 +20,9 @@ texture_filter = 0
 texture = ExtResource("2_qqx3l")
 
 [node name="Player" parent="." instance=ExtResource("3_iodf5")]
+
+[node name="Enemy" parent="." instance=ExtResource("4_gnwpv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.023)
 
 [node name="tree" parent="." instance=ExtResource("4_uubeu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76382, 0, -4.91732)
