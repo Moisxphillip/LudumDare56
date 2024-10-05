@@ -7,7 +7,13 @@ func _ready():
     return
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(delta):
+    # Run towards the player
+    var player_position = get_parent().get_node("Player").position
+    var dir = position.direction_to(player_position)
+    
+    move_and_collide(dir * delta)
+    
     pass
 
 func hit(damage: float):
