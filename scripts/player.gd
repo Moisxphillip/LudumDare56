@@ -7,12 +7,13 @@ var bullet = preload("res://scenes/bullet.tscn")
 func _physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("Shoot"):
         var shot = bullet.instantiate()
-        print(ray_query())
-        var direct = global_position.direction_to(ray_query())
-        shot.setup(Vector2(direct.x, direct.z), 8.0)
+        var direct = global_position.direction_to(global_position+ray_query())
+        shot.setup(Vector2(direct.x, direct.z).normalized(), 8.0)
         get_parent().add_child(shot)
         shot.global_position = global_position
-        
+        shot.global_position.y = direct.y
+        pass
+    ray_query()
 
     var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
     var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -28,36 +29,36 @@ func _physics_process(_delta: float) -> void:
     move_and_slide()
 
 
-var lastWasDown: bool = false
+var lastWasLeft: bool = false
 
-func animation(direction: Vector2)->void:
+func animation(direction: Vector2)->void:#change to left and right
     if direction == Vector2.ZERO:
-        $Animation.stop()
-        $Sprite.frame = 0
+        $Animation.play("Idle")
         return
         
-    if !$Animation.is_playing():
-            if direction.y>=0:
-                $Animation.play("Down")
+    if $Animation.current_animation == "Idle":
+            $Animation.play("Walk")
+            if direction.x>=0:
+                $Sprite.flip_h = false
             else:
-                $Animation.play("Up")
-    elif direction.y>=0 and lastWasDown:
-        $Animation.play("Down")
-        lastWasDown = false
-    elif direction.y<0 and !lastWasDown:
-        $Animation.play("Up")
-        lastWasDown = true
-    pass
+                $Sprite.flip_h = true
+                
+    elif direction.x>0 and lastWasLeft:
+        $Sprite.flip_h = false
+        lastWasLeft = false
+    elif direction.x<0 and !lastWasLeft:
+        $Sprite.flip_h = true
+        lastWasLeft = true
+
 
 func ray_query() -> Vector3:
     var mousePos = get_viewport().get_mouse_position()
-    print(mousePos)#todo find better method
-    var rayOrigin = $Camera3D.project_ray_origin(mousePos)
-    var rayDir = rayOrigin+$Camera3D.project_ray_normal(mousePos)*500
-    var rayQuery = PhysicsRayQueryParameters3D.create(rayOrigin, rayDir)
-    rayQuery.collide_with_bodies = true
-    var spaceState = get_world_3d().direct_space_state
-    var rayResult = spaceState.intersect_ray(rayQuery)
-    if(!rayResult.is_empty()):
-        return rayResult.position
-    return Vector3.ZERO
+    mousePos.x = clamp(mousePos.x, 0, float(DisplayServer.window_get_size().x))
+    mousePos.y = clamp(mousePos.y, 0, float(DisplayServer.window_get_size().y))
+    mousePos/=Vector2(DisplayServer.window_get_size())
+
+    var toScreen = (mousePos-Vector2(0.5, 0.5))*2
+
+    var pos = toScreen*Vector2(11, 12)
+    return Vector3(pos.x, 4.0, pos.y)
+

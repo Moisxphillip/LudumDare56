@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6aqvimtk5hp7"]
+
+[ext_resource type="PackedScene" uid="uid://bi4nraxb187aa" path="res://scenes/floor_tile.tscn" id="1_lqy32"]
+
+[node name="TileLibrary" type="Node3D"]
+
+[node name="FloorTile" parent="." instance=ExtResource("1_lqy32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

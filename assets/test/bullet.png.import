@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ci8nricl8kbnx"
-path.s3tc="res://.godot/imported/bullet.png-53759e1959a7aafd1c5a150d54e7370c.s3tc.ctex"
+path="res://.godot/imported/bullet.png-53759e1959a7aafd1c5a150d54e7370c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/test/bullet.png"
-dest_files=["res://.godot/imported/bullet.png-53759e1959a7aafd1c5a150d54e7370c.s3tc.ctex"]
+dest_files=["res://.godot/imported/bullet.png-53759e1959a7aafd1c5a150d54e7370c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
