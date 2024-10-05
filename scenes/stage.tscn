@@ -41,3 +41,8 @@ environment = SubResource("Environment_lr01n")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.667443, 0.744661, 0, -0.744661, 0.667443, 0, 61.4121, 72.8593)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
