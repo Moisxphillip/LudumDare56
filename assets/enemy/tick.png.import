@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xa1g2reyowhi"
-path="res://.godot/imported/floor.png-3c35ac8fcd693117de4f9eddc7f3dc4d.ctex"
+uid="uid://c7h26jqanqs7g"
+path="res://.godot/imported/tick.png-e5e94bbb8c73e2067ee8d202aeb654e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/test/floor.png"
-dest_files=["res://.godot/imported/floor.png-3c35ac8fcd693117de4f9eddc7f3dc4d.ctex"]
+source_file="res://assets/enemy/tick.png"
+dest_files=["res://.godot/imported/tick.png-e5e94bbb8c73e2067ee8d202aeb654e1.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
