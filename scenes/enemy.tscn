@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://4kykphxeted6"]
+[gd_scene load_steps=10 format=3 uid="uid://4kykphxeted6"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ay7qe"]
-[ext_resource type="Texture2D" uid="uid://ddevichgyp8e7" path="res://assets/test/enemy.png" id="1_i887q"]
+[ext_resource type="Texture2D" uid="uid://wojeqg6x7d4l" path="res://assets/enemy/shelltick.png" id="2_vea5p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yhasi"]
 radius = 0.710711
@@ -10,6 +10,42 @@ height = 1.66975
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qxt0l"]
 radius = 0.288254
 height = 0.576508
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygwwr"]
+atlas = ExtResource("2_vea5p")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bo5p"]
+atlas = ExtResource("2_vea5p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue4o1"]
+atlas = ExtResource("2_vea5p")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q153e"]
+atlas = ExtResource("2_vea5p")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vibx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygwwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bo5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue4o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q153e")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="Enemy" type="RigidBody3D"]
 gravity_scale = 0.0
@@ -20,20 +56,17 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.864228, 0)
+transform = Transform3D(0.379207, 0, 0, 0, 0.379207, 0, 0, 0, 0.379207, 0, 0.877175, 0)
 shape = SubResource("CapsuleShape3D_yhasi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895512, 0)
+transform = Transform3D(0.379207, 0, 0, 0, 0.379207, 0, 0, 0, 0.379207, 0, 0.889038, 0)
 shape = SubResource("CapsuleShape3D_qxt0l")
 
-[node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0.895512, 0)
-pixel_size = 0.0045
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(7.7, 0, 0, 0, 6.6684, 3.85, 0, -3.85, 6.6684, 0, 0.889038, 0)
 texture_filter = 0
-texture = ExtResource("1_i887q")
-hframes = 4
-vframes = 4
-frame = 1
+sprite_frames = SubResource("SpriteFrames_6vibx")
+animation = &"walk"
 
 [connection signal="area_shape_entered" from="EnemyArea" to="." method="_on_area_3d_area_shape_entered"]
