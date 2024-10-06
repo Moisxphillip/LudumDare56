@@ -5,15 +5,20 @@ const SPEED = 20.0
 var bullet = preload("res://scenes/bullet.tscn")
 var self_damage = 10.0
 var hitpoints = 100.0
+var can_shoot = true
+var shoot_interval = 0.3
 
 func _physics_process(_delta: float) -> void:
-    if Input.is_action_just_pressed("Shoot"):
+    if Input.is_action_pressed("Shoot") and can_shoot:
         var shot = bullet.instantiate()
         var direct = global_position.direction_to(global_position+ray_query())
         shot.setup(Vector2(direct.x, direct.z).normalized(), 8.0)
         get_parent().add_child(shot)
         shot.global_position = global_position
         shot.global_position.y = direct.y
+        can_shoot = false
+        $ShootTimer.start(shoot_interval)
+        
         pass
     ray_query()
 
@@ -79,3 +84,8 @@ func _on_area_3d_area_shape_entered(_area_rid, area, _area_shape_index, _local_s
         hit(self_damage)
         print("PLAYER HP: ", hitpoints)
     return
+
+
+func _on_shoot_timer_timeout():
+    can_shoot = true
+    pass # Replace with function body.
