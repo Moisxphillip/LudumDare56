@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 20.0
 var bullet = preload("res://scenes/bullet.tscn")
 
 func _physics_process(_delta: float) -> void:
@@ -38,10 +38,10 @@ func animation(direction: Vector2)->void:#change to left and right
         
     if $Animation.current_animation == "Idle":
             $Animation.play("Walk")
-            if direction.x>=0:
-                $Sprite.flip_h = false
-            else:
-                $Sprite.flip_h = true
+            #if direction.x>=0:
+                #$Sprite.flip_h = false
+            #else:
+                #$Sprite.flip_h = true
                 
     elif direction.x>0 and lastWasLeft:
         $Sprite.flip_h = false
