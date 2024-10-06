@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://4kykphxeted6"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ay7qe"]
+[ext_resource type="Texture2D" uid="uid://ddevichgyp8e7" path="res://assets/test/enemy.png" id="1_i887q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yhasi"]
+radius = 0.710711
+height = 1.66975
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qxt0l"]
+radius = 0.288254
+height = 0.576508
+
+[node name="Enemy" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_ay7qe")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.864228, 0)
+shape = SubResource("CapsuleShape3D_yhasi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895512, 0)
+shape = SubResource("CapsuleShape3D_qxt0l")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0.895512, 0)
+pixel_size = 0.0045
+texture_filter = 0
+texture = ExtResource("1_i887q")
+hframes = 4
+vframes = 4
+frame = 1
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
