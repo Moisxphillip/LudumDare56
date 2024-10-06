@@ -14,7 +14,7 @@ const ENEMY_1 = preload("res://scenes/enemy.tscn")
 const ENEMY_2 = preload("res://scenes/enemy.tscn")
 
 @export var enemy_odds = 0.1
-@export var spawn_radius_modifier = 0.01
+@export var spawn_radius_modifier = 0.01 # Increase/Decrease spawn radius
 
 func spawn_enemy():
     # Choose a random spawn point outside the window
@@ -35,8 +35,6 @@ func spawn_enemy():
     add_child(enemy)
     enemy.global_position = spawn_point
 
-    print("CENTER: ", camera_position)
-    print("SPAWN: ", safe_spawn_radius)
     return
 
 # Spawn new enemies
