@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn2cpf8q3go4g"]
+[gd_scene load_steps=12 format=3 uid="uid://cn2cpf8q3go4g"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4iwp"]
 [ext_resource type="Texture2D" uid="uid://k6i1lw2oov86" path="res://assets/test/test.png" id="1_sdjph"]
 [ext_resource type="PackedScene" uid="uid://biu7eh8c443cd" path="res://scenes/bullet.tscn" id="3_fseq7"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_gxruw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ug0ek"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pltsg"]
 height = 1.77923
@@ -75,6 +77,14 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_r4iwp")
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895512, 0)
+shape = SubResource("CapsuleShape3D_ug0ek")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895512, 0)
 shape = SubResource("CapsuleShape3D_pltsg")
@@ -108,3 +118,5 @@ grow_vertical = 2
 [node name="Bullet" parent="." instance=ExtResource("3_fseq7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04284, 0.366445)
 visible = false
+
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]

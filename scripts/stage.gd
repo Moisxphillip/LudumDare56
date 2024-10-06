@@ -8,6 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+    
+    # Finish if player is dead
+    if get_node("Player") == null:
+        queue_free()
     pass
 
 const ENEMY_1 = preload("res://scenes/enemy.tscn")
