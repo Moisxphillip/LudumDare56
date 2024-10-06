@@ -1,0 +1,110 @@
+[gd_scene load_steps=11 format=3 uid="uid://cn2cpf8q3go4g"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r4iwp"]
+[ext_resource type="Texture2D" uid="uid://k6i1lw2oov86" path="res://assets/test/test.png" id="1_sdjph"]
+[ext_resource type="PackedScene" uid="uid://biu7eh8c443cd" path="res://scenes/bullet.tscn" id="3_fseq7"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_gxruw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pltsg"]
+height = 1.77923
+
+[sub_resource type="Animation" id="Animation_ynm8j"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a50sg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o2n0y"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k36ex"]
+_data = {
+"Idle": SubResource("Animation_ynm8j"),
+"RESET": SubResource("Animation_a50sg"),
+"Walk": SubResource("Animation_o2n0y")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnax6"]
+shader = ExtResource("3_gxruw")
+shader_parameter/vignette_intensity = 0.8
+shader_parameter/vignette_opacity = 0.455
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_r4iwp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895512, 0)
+shape = SubResource("CapsuleShape3D_pltsg")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(7, 0, 0, 0, 6.06218, 3.5, 0, -3.5, 6.06218, -0.0871944, 1.00087, -0.00502014)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_sdjph")
+hframes = 4
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k36ex")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8.57354, 12.04)
+projection = 1
+size = 12.0
+
+[node name="Vignette" type="ColorRect" parent="Camera3D"]
+material = SubResource("ShaderMaterial_xnax6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bullet" parent="." instance=ExtResource("3_fseq7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04284, 0.366445)
+visible = false
