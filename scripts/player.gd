@@ -3,6 +3,8 @@ extends CharacterBody3D
 
 const SPEED = 20.0
 var bullet = preload("res://scenes/bullet.tscn")
+var self_damage = 10.0
+var hitpoints = 100.0
 
 func _physics_process(_delta: float) -> void:
     if Input.is_action_just_pressed("Shoot"):
@@ -62,3 +64,18 @@ func ray_query() -> Vector3:
     var pos = toScreen*Vector2(11, 12)
     return Vector3(pos.x, 4.0, pos.y)
 
+func die():
+    queue_free()
+    return
+
+func hit(damage):
+    hitpoints -= damage
+    if hitpoints <= 0.0:
+        die()
+    return
+
+func _on_area_3d_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
+    if area.name == "EnemyArea":
+        hit(self_damage)
+        print("PLAYER HP: ", hitpoints)
+    return

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://do0f12lh8hy4o"]
+
+[ext_resource type="PackedScene" uid="uid://4kykphxeted6" path="res://scenes/enemy.tscn" id="1_3dkol"]
+[ext_resource type="Texture2D" uid="uid://brm1tln1mh1c1" path="res://assets/enemy/speedtick.png" id="2_5wwod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kxhb"]
+atlas = ExtResource("2_5wwod")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esh6i"]
+atlas = ExtResource("2_5wwod")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jqe0"]
+atlas = ExtResource("2_5wwod")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd0uu"]
+atlas = ExtResource("2_5wwod")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_befg5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kxhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esh6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jqe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yd0uu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_3dkol")]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="2"]
+transform = Transform3D(7.7, 0, 0, 0, 6.6684, 3.85, 0, -3.85, 6.6684, 0, 0.889038, 0)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_befg5")
+animation = &"walk"
