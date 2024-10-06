@@ -14,10 +14,10 @@ func _process(_delta: float) -> void:
         queue_free()
     pass
 
-const ENEMY_1 = preload("res://scenes/enemy.tscn")
-const ENEMY_2 = preload("res://scenes/enemy.tscn")
+const TICK = preload("res://scenes/tick.tscn")
+const SPEED_TICK = preload("res://scenes/speedtick.tscn")
+const SHELL_TICK = preload("res://scenes/shelltick.tscn")
 
-@export var enemy_odds = 0.1
 @export var spawn_radius_modifier = 0.01 # Increase/Decrease spawn radius
 
 func spawn_enemy():
@@ -31,10 +31,13 @@ func spawn_enemy():
 
     # Choose enemy to spawn
     var enemy = 0
-    if randf_range(0, 1) <= enemy_odds:
-        enemy = ENEMY_1.instantiate()
+    var odds = randf_range(0, 1)
+    if odds <= 0.45:
+        enemy = TICK.instantiate()
+    elif odds <= 0.7:
+        enemy = SPEED_TICK.instantiate()
     else:
-        enemy = ENEMY_2.instantiate()
+        enemy = SHELL_TICK.instantiate()
 
     add_child(enemy)
     enemy.global_position = spawn_point
