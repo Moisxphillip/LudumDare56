@@ -29,6 +29,7 @@ func hit(damage: float):
     return
 
 func die():
+    GlobalData.curr_enemy_count -= 1
     queue_free()
     return
 

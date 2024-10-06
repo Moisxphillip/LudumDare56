@@ -1,6 +1,5 @@
 extends Node3D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
@@ -41,10 +40,13 @@ func spawn_enemy():
 
     add_child(enemy)
     enemy.global_position = spawn_point
+    
+    GlobalData.curr_enemy_count += 1
 
     return
 
 # Spawn new enemies
 func _on_enemy_spawn_timer_timeout():
-    spawn_enemy()
+    if GlobalData.curr_enemy_count < GlobalData.max_enemy_count:
+        spawn_enemy()
     return
