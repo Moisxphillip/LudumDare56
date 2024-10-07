@@ -4,13 +4,15 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yhasi"]
 radius = 0.710711
-height = 1.66975
+height = 6.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qxt0l"]
-radius = 0.288254
-height = 0.576508
+radius = 0.281781
+height = 5.63551
 
 [node name="Enemy" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 3
 gravity_scale = 0.0
 script = ExtResource("1_ay7qe")
 
