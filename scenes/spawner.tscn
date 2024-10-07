@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2awh3tgfa645"]
+
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="1_oh68a"]
+[ext_resource type="PackedScene" uid="uid://b8yts8io47708" path="res://assets/test/tree.glb" id="2_hl1ki"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_oh68a")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="tree" parent="." instance=ExtResource("2_hl1ki")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

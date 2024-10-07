@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 20.0
+const SPEED = 8.0
 var bullet = preload("res://scenes/bullet.tscn")
 var pierce = preload("res://scenes/pierce_bullet.tscn")
 var bomb = preload("res://scenes/bomb_bullet.tscn")
@@ -48,7 +48,7 @@ func _physics_process(_delta: float) -> void:
                 speed = 4.0
         if shot == null:
             return
-        
+        $Pew.play(0.0)
         #var shot = bullet.instantiate()
         var direct = global_position.direction_to(global_position+ray_query())
         shot.setup(Vector2(direct.x, direct.z).normalized(), speed)
@@ -58,7 +58,7 @@ func _physics_process(_delta: float) -> void:
         can_shoot = false
         $ShootTimer.start(shoot_interval)
         
-    ray_query()
+    #ray_query()
 
     var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
     var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -104,24 +104,13 @@ func ray_query() -> Vector3:
     mousePos.x = clamp(mousePos.x, 0, float(DisplayServer.window_get_size().x))
     mousePos.y = clamp(mousePos.y, 0, float(DisplayServer.window_get_size().y))
     mousePos/=Vector2(DisplayServer.window_get_size())
-
     var toScreen = (mousePos-Vector2(0.5, 0.5))*2
 
     var pos = toScreen*Vector2(11, 12)
     return Vector3(pos.x, 4.0, pos.y)
 
 
-func die():
-    $Sprite.queue_free()
-    return
-
-
-func hit():
-    UI.lose_live()
-    if UI.lives <= 0:
-        die()
-    return
-
+var played:bool = false
 
 func _on_area_3d_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
     if area.name == "EnemyArea":
@@ -129,8 +118,10 @@ func _on_area_3d_area_shape_entered(_area_rid, area, _area_shape_index, _local_s
         UI.lose_live()
         if UI.lives == 0:
             $Sprite.visible = false
-        #print("PLAYER HP: ", hitpoints)
-    #return
+            if !played:
+                $Dead.play()
+                played = true
+
 
 
 func _on_shoot_timer_timeout():

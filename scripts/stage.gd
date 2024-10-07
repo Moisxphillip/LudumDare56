@@ -2,22 +2,22 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    $Music.play()
     UI.visible = true
     UI.start()
-    pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-    
-    # Finish if player is dead
-    if get_node("Player") == null:
-        queue_free()
-    pass
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(_delta: float) -> void:
+    #
+    ## Finish if player is dead
+    #if get_node("Player") == null:
+        #queue_free()
+    #pass
 
-const TICK = preload("res://scenes/tick.tscn")
-const SPEED_TICK = preload("res://scenes/speedtick.tscn")
-const SHELL_TICK = preload("res://scenes/shelltick.tscn")
+var TICK = preload("res://scenes/tick.tscn")
+var SPEED_TICK = preload("res://scenes/speedtick.tscn")
+var SHELL_TICK = preload("res://scenes/shelltick.tscn")
 
 @export var spawn_radius_modifier = 0.01 # Increase/Decrease spawn radius
 
@@ -49,6 +49,6 @@ func spawn_enemy():
 
 # Spawn new enemies
 func _on_enemy_spawn_timer_timeout():
-    if GlobalData.curr_enemy_count < GlobalData.max_enemy_count:
-        spawn_enemy()
+    #if GlobalData.curr_enemy_count < GlobalData.max_enemy_count:
+        #spawn_enemy()
     return
