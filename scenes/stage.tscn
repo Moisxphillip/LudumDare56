@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmbls1vqoj0kk"]
+[gd_scene load_steps=8 format=3 uid="uid://dmbls1vqoj0kk"]
 
 [ext_resource type="Script" path="res://scripts/stage.gd" id="1_s63fr"]
 [ext_resource type="PackedScene" uid="uid://cn2cpf8q3go4g" path="res://scenes/player.tscn" id="3_iodf5"]
-[ext_resource type="PackedScene" uid="uid://bcknbgu4nphy7" path="res://scenes/ui.tscn" id="5_epa0n"]
 [ext_resource type="MeshLibrary" uid="uid://1k4foj1k3us5" path="res://tres/tile_library.tres" id="5_raop2"]
 [ext_resource type="PackedScene" uid="uid://dbyhrwageqxph" path="res://scenes/tree.tscn" id="5_weqwd"]
 
@@ -478,8 +477,6 @@ transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 6.61442,
 
 [node name="Tree48" parent="ScenarioNodes" instance=ExtResource("5_weqwd")]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 14.7917, 0, 6.4541)
-
-[node name="UI" parent="." instance=ExtResource("5_epa0n")]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 autostart = true

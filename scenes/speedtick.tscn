@@ -40,6 +40,10 @@ animations = [{
 }]
 
 [node name="Enemy" instance=ExtResource("1_3dkol")]
+collision_mask = 3
+hitpoints = 2
+type = 2
+speed = 5.0
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="2"]
 transform = Transform3D(7.7, 0, 0, 0, 6.6684, 3.85, 0, -3.85, 6.6684, 0, 0.889038, 0)

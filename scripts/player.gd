@@ -3,23 +3,61 @@ extends CharacterBody3D
 
 const SPEED = 20.0
 var bullet = preload("res://scenes/bullet.tscn")
-var self_damage = 10.0
-var hitpoints = 100.0
+var pierce = preload("res://scenes/pierce_bullet.tscn")
+var bomb = preload("res://scenes/bomb_bullet.tscn")
+
+#var hitpoints = 3
 var can_shoot = true
 var shoot_interval = 0.3
 
+var shootMode = 1
+
 func _physics_process(_delta: float) -> void:
+    if UI.lives <= 0:
+        velocity.x = move_toward(velocity.x, 0, SPEED)
+        velocity.z = move_toward(velocity.z, 0, SPEED)
+        return
+        
+    if Input.is_action_just_pressed("Normal"):
+        shootMode = 1
+        pass
+    elif Input.is_action_just_pressed("Pierce"):
+        shootMode = 2
+        pass
+    elif Input.is_action_just_pressed("Bomb"):
+        shootMode = 3
+        pass
+    
     if Input.is_action_pressed("Shoot") and can_shoot:
-        var shot = bullet.instantiate()
+        var success:bool = false
+        var shot = null
+        var speed  = 7.0
+        if shootMode == 1:
+            success = UI.shoot_normal()
+            if success:
+                shot = bullet.instantiate()
+        elif shootMode == 2:
+            success = UI.shoot_pierce()
+            if success:
+                shot = pierce.instantiate()
+                speed = 9.0
+        elif shootMode == 3:
+            success = UI.shoot_bomb()
+            if success:
+                shot = bomb.instantiate()
+                speed = 4.0
+        if shot == null:
+            return
+        
+        #var shot = bullet.instantiate()
         var direct = global_position.direction_to(global_position+ray_query())
-        shot.setup(Vector2(direct.x, direct.z).normalized(), 8.0)
+        shot.setup(Vector2(direct.x, direct.z).normalized(), speed)
         get_parent().add_child(shot)
         shot.global_position = global_position
         shot.global_position.y = direct.y
         can_shoot = false
         $ShootTimer.start(shoot_interval)
         
-        pass
     ray_query()
 
     var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
@@ -39,6 +77,9 @@ func _physics_process(_delta: float) -> void:
 var lastWasLeft: bool = false
 
 func animation(direction: Vector2)->void:#change to left and right
+    if UI.lives <= 0:
+        return
+        
     if direction == Vector2.ZERO:
         $Animation.play("Idle")
         return
@@ -69,21 +110,27 @@ func ray_query() -> Vector3:
     var pos = toScreen*Vector2(11, 12)
     return Vector3(pos.x, 4.0, pos.y)
 
+
 func die():
-    queue_free()
+    $Sprite.queue_free()
     return
 
-func hit(damage):
-    hitpoints -= damage
-    if hitpoints <= 0.0:
+
+func hit():
+    UI.lose_live()
+    if UI.lives <= 0:
         die()
     return
 
+
 func _on_area_3d_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
     if area.name == "EnemyArea":
-        hit(self_damage)
-        print("PLAYER HP: ", hitpoints)
-    return
+        #hit(self_damage)
+        UI.lose_live()
+        if UI.lives == 0:
+            $Sprite.visible = false
+        #print("PLAYER HP: ", hitpoints)
+    #return
 
 
 func _on_shoot_timer_timeout():

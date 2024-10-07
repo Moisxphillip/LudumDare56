@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dep4so86rtg0h"]
+
+[ext_resource type="PackedScene" uid="uid://biu7eh8c443cd" path="res://scenes/bullet.tscn" id="1_mlyfi"]
+[ext_resource type="Script" path="res://scripts/pierce_bullet.gd" id="2_ssuha"]
+
+[node name="PierceBullet" instance=ExtResource("1_mlyfi")]
+script = ExtResource("2_ssuha")
+
+[node name="Sprite3D" parent="." index="1"]
+modulate = Color(0.825536, 0, 0.454335, 1)

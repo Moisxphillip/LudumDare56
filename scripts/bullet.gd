@@ -1,4 +1,5 @@
 extends Area3D
+class_name Bullet
 
 var direction: Vector2 = Vector2.ZERO
 var speed: float = 6.0
@@ -22,8 +23,14 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
     #print("outside screen")
     queue_free()
 
+#
+#func _on_body_entered(_body: Node3D) -> void:
+    ##print("body entered")
+    ##print(_body.name)
+    #queue_free()
 
-func _on_body_entered(_body: Node3D) -> void:
-    #print("body entered")
-    #print(_body.name)
+func action()->void:
     queue_free()
+    
+func _on_area_entered(_area: Area3D) -> void:
+    action()

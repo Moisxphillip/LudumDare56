@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cn2cpf8q3go4g"]
+[gd_scene load_steps=11 format=3 uid="uid://cn2cpf8q3go4g"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4iwp"]
 [ext_resource type="Texture2D" uid="uid://k6i1lw2oov86" path="res://assets/test/test.png" id="1_sdjph"]
-[ext_resource type="PackedScene" uid="uid://biu7eh8c443cd" path="res://scenes/bullet.tscn" id="3_fseq7"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_gxruw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ug0ek"]
@@ -114,10 +113,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Bullet" parent="." instance=ExtResource("3_fseq7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04284, 0.366445)
-visible = false
 
 [node name="ShootTimer" type="Timer" parent="."]
 

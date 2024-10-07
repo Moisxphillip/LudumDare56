@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6meyggjp5e4m"
-path="res://.godot/imported/teste.png-9db1f8f7f8906348c3ff527e8312c9f4.ctex"
+uid="uid://74rihie3r1gp"
+path="res://.godot/imported/defeated_by_the_ticks.png-eb467d4c886d1b0d8d5d73dcafa92a90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/test/teste.png"
-dest_files=["res://.godot/imported/teste.png-9db1f8f7f8906348c3ff527e8312c9f4.ctex"]
+source_file="res://assets/defeated_by_the_ticks.png"
+dest_files=["res://.godot/imported/defeated_by_the_ticks.png-eb467d4c886d1b0d8d5d73dcafa92a90.ctex"]
 
 [params]
 
