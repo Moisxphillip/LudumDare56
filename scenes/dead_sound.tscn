@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlw2volto207m"]
+
+[ext_resource type="Script" path="res://scripts/dead_sound.gd" id="1_0ucu6"]
+[ext_resource type="AudioStream" uid="uid://cu4loya1b67ce" path="res://assets/sfx/crop_dead.wav" id="1_3ytri"]
+
+[node name="DeadSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_3ytri")
+bus = &"Effects"
+script = ExtResource("1_0ucu6")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

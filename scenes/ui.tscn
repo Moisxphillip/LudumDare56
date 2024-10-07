@@ -38,6 +38,13 @@ offset_bottom = -140.0
 grow_vertical = 2
 scale = Vector2(4, 4)
 
+[node name="Active" type="ColorRect" parent="Shots/NormalShot"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 69.0
+offset_bottom = 41.0
+color = Color(0.74383, 0.192781, 0.254728, 1)
+
 [node name="Icon" type="TextureRect" parent="Shots/NormalShot"]
 layout_mode = 0
 offset_right = 40.0
@@ -64,6 +71,12 @@ offset_bottom = -120.0
 grow_vertical = 0
 scale = Vector2(4, 4)
 
+[node name="Active" type="ColorRect" parent="Shots/PierceShot"]
+offset_top = 2.0
+offset_right = 69.0
+offset_bottom = 41.0
+color = Color(0.745098, 0.192157, 0.254902, 1)
+
 [node name="Icon" type="TextureRect" parent="Shots/PierceShot"]
 layout_mode = 0
 offset_right = 40.0
@@ -89,6 +102,12 @@ offset_right = 692.0
 offset_bottom = -120.0
 grow_vertical = 0
 scale = Vector2(4, 4)
+
+[node name="Active" type="ColorRect" parent="Shots/BombShot"]
+offset_top = 2.0
+offset_right = 69.0
+offset_bottom = 41.0
+color = Color(0.745098, 0.192157, 0.254902, 1)
 
 [node name="Icon" type="TextureRect" parent="Shots/BombShot"]
 layout_mode = 0

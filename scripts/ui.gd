@@ -6,17 +6,19 @@ var lives:int = 3
 var kills:int = 0
 
 func start()->void:
+    GlobalData.curr_enemy_count = 0
     $Lost.visible = false
     time = 0.0
     lives = 3
     $Lives/Quantity.text = str(lives)
     kills = 0
     $KillCount/Quantity.text = str(kills)
-    add_normal_shot(10)
-    
-
-func _ready() -> void:
-    pass # Replace with function body.
+    $Shots/NormalShot/Quantity.text = "10"
+    $Shots/PierceShot/Quantity.text = "3"
+    $Shots/BombShot/Quantity.text = "1"
+    $Shots/NormalShot/Active.visible = true
+    $Shots/PierceShot/Active.visible = false
+    $Shots/BombShot/Active.visible = false
 
 
 func update_time()->void:
@@ -31,6 +33,24 @@ func _process(delta: float) -> void:
     time+=delta
     if lives != 0:
         update_time()
+    
+    if Input.is_action_just_pressed("Normal"):
+        $Shots/NormalShot/Active.visible = true
+        $Shots/PierceShot/Active.visible = false
+        $Shots/BombShot/Active.visible = false
+        pass
+    
+    elif Input.is_action_just_pressed("Pierce"):
+        $Shots/NormalShot/Active.visible = false
+        $Shots/PierceShot/Active.visible = true
+        $Shots/BombShot/Active.visible = false
+        pass
+    
+    elif Input.is_action_just_pressed("Bomb"):
+        $Shots/NormalShot/Active.visible = false
+        $Shots/PierceShot/Active.visible = false
+        $Shots/BombShot/Active.visible = true
+        pass
     
     
 func killed_enemy()->void:

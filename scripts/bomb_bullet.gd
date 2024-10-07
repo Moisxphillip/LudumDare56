@@ -5,5 +5,6 @@ func _ready() -> void:
     
 
 func action() -> void:
+    speed = 0.0
     if !$Animation.is_playing():
         $Animation.play("Blow")

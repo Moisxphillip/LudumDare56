@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cidendtymjh54"]
+[gd_scene load_steps=9 format=3 uid="uid://cidendtymjh54"]
 
 [ext_resource type="PackedScene" uid="uid://biu7eh8c443cd" path="res://scenes/bullet.tscn" id="1_duaat"]
 [ext_resource type="Script" path="res://scripts/bomb_bullet.gd" id="2_37pbv"]
 [ext_resource type="Texture2D" uid="uid://di5k6vc05vfj8" path="res://assets/explosion.png" id="3_tk5ll"]
+[ext_resource type="AudioStream" uid="uid://c3egl8h05pjsk" path="res://assets/sfx/bomb.wav" id="3_xexwy"]
 
-[sub_resource type="Animation" id="Animation_l8ntp"]
-resource_name = "Ready"
-length = 0.001
+[sub_resource type="Animation" id="Animation_gnvaa"]
+resource_name = "Blow"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14,10 +15,50 @@ tracks/0/path = NodePath("Bomb:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.51402, 2.49761, 0.512506]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_i68ep"]
@@ -47,8 +88,9 @@ tracks/1/keys = {
 "values": [0.51402]
 }
 
-[sub_resource type="Animation" id="Animation_gnvaa"]
-resource_name = "Blow"
+[sub_resource type="Animation" id="Animation_l8ntp"]
+resource_name = "Ready"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -56,10 +98,10 @@ tracks/0/path = NodePath("Bomb:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -68,24 +110,10 @@ tracks/1/path = NodePath("CollisionShape3D:shape:radius")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.51402, 2.49761, 0.512506, 0.102105]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"update": 0,
+"values": [0.51402]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b70m4"]
@@ -101,14 +129,17 @@ script = ExtResource("2_37pbv")
 [node name="Sprite3D" parent="." index="1"]
 modulate = Color(0, 0, 0, 1)
 
-[node name="Bomb" type="Sprite3D" parent="." index="3"]
+[node name="Audio" parent="." index="3"]
+stream = ExtResource("3_xexwy")
+
+[node name="Bomb" type="Sprite3D" parent="." index="4"]
 transform = Transform3D(15, 0, 0, 0, -6.55671e-07, -15, 0, 15, -6.55671e-07, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("3_tk5ll")
 hframes = 6
 frame = 5
 
-[node name="Animation" type="AnimationPlayer" parent="." index="4"]
+[node name="Animation" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_b70m4")
 }
